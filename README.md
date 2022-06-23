@@ -1,1 +1,2 @@
-# survey-frontend-admin
+# tutorial-frontend
+Tutorial Vue frontend
