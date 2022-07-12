@@ -41,6 +41,7 @@ const router = createRouter({
         reload: true,
       },
     },
+
     {
       path: "/adminlist",
       name: "AdminList",
@@ -49,6 +50,7 @@ const router = createRouter({
         reload: true,
       },
     },
+
     {
       path: "/admindetail/:id",
       name: "AdminDetail",
