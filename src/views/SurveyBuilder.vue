@@ -139,6 +139,7 @@ export default {
           window.console.log('Question type not matched');
       }
     },
+    
     /**
      * @param {String} format
      * @return {null}
