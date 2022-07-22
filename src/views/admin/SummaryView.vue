@@ -59,7 +59,7 @@
     name: 'SummaryView',
     data(){
       return {
-        url: this.$route.params.url,
+        surveyId: this.$route.params.surveyId,
         surveyName: this.$route.params.name,
         questions: null,
         ansData: [],
@@ -220,11 +220,11 @@
           this.$router.push({name: 'GetMySurvey', params: {id: 'unauthorized'}}); 
         }
         
-      const url = {
-        url: this.url
+      const surveyId = {
+        surveyId: this.surveyId
       }
 
-       axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/fechanswers',url)
+       axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/fechanswers',surveyId)
       .then(res => {
         this.questions = res.data
         this.questions.forEach((element, index) => {

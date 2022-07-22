@@ -17,10 +17,17 @@
     </button>
 
     <button
-      id="logout-button" class="btn btn-outline-success my-2 my-sm-0"
+      id="logout-button" class="btn btn-outline-success my-2 my-sm-0"  style="margin:0.5vh"
       v-on:click="surveyCreateRedirect"
       v-show="isLoggedOut" >
       Create Survey 
+    </button>
+
+    <button
+      id="logout-button" class="btn btn-outline-success my-2 my-sm-0"  style="margin:0.5vh"
+      v-on:click="profieDetailRedirect"
+      v-show="isLoggedOut" >
+      Profile Detail
     </button>
 
     <button
@@ -54,7 +61,7 @@
         localStorage.removeItem("token");
         this.active = false;
         this.userId = null;
-        this.$router.push({name: 'GetMySurvey', params: {id: 'loggedout'}}); 
+        this.$router.push({name: 'login'}); 
       },
       handleLogin() {
         this.$router.push({name: 'login'}); 
@@ -67,7 +74,11 @@
       },
       adminListRedirect(){
       this.$router.push({name: 'AdminList'}); 
+      },
+       profieDetailRedirect(){
+      this.$router.push({name: 'ProfileDetail',params: {id: this.userId}}); 
       }
+      
     },
     computed: {
        isLoggedOut() {

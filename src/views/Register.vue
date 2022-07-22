@@ -59,7 +59,7 @@ export default {
         email: this.email,
         password: this.password,
       }
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/register',registerUser);
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/register',registerUser);
       this.$forceUpdate();
       this.$router.push({name: 'GetMySurvey',params: {id: 'adminregistered'}}); 
     }

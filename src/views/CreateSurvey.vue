@@ -58,7 +58,7 @@ export default {
         return;
       }
 
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/create',data)
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/create',data)
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;

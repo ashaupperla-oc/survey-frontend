@@ -154,7 +154,7 @@ export default {
         }
       });
 
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+"api/answer/create",value)
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+"api/answer/create",value)
     .then(res => {
     });
       this.$router.push({name: 'GetMySurvey', params: {id: 'filledsurvey'}}); 
