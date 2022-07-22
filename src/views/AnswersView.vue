@@ -85,6 +85,7 @@
   </div>
 </template>
 
+
 <script>
 import vueSlider from 'vue-slider-component';
 import SurveyBuilder from './SurveyBuilder.vue';
