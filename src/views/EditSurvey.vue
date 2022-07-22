@@ -29,7 +29,7 @@ export default {
       surveyList: [],
       questionsList: [],
       addQuestion: false,
-      url : this.$route.params.url
+      surveyid : this.$route.params.surveyId
     };
   },
   mounted() {
@@ -37,9 +37,9 @@ export default {
       this.updateQuestionsList(q);
     });
     let viewSurveyReq = {
-      url: this.$route.params.url
+      surveyId: this.$route.params.surveyId
     }
-
+    console.log(" viewSurveyReq ", viewSurveyReq)
      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/view',viewSurveyReq)
     .then(res => {
       this.questionsList= [];
@@ -56,10 +56,10 @@ export default {
       const data = {
         questionsList : this.questionsList,
         userId : localStorage.getItem("userId"),
-        url: this.url
+        surveyid: this.surveyid
       }
 
-      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data)
+      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data)
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;

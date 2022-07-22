@@ -1,5 +1,6 @@
 <template>
   <section class="vh-100">
+    <Header staticContent='' title="" />
   <b-alert show variant="success" v-if="$route.params.id === 'registered'">User Registered Successfully</b-alert>
 
   <div class="container-fluid  vh-100">
@@ -48,6 +49,7 @@
 
 <script>
 import axios from 'axios';
+import Header from './Header.vue';
 
 export default {
   name: 'Login',
@@ -59,6 +61,7 @@ export default {
       message: null
     }
   },
+  components: {Header},
   methods: {
     login(){
       let loginUser = {

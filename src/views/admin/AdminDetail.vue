@@ -81,7 +81,7 @@ export default {
         name: this.name,
       }
 
-      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails)
+      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails)
       .then(res => {
         if(res.status == 401){
           this.errorMsg = res.data.error;
