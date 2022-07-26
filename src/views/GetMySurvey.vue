@@ -91,7 +91,8 @@ export default {
       questionsList: [],
       filteredSurveyList: [],
       displaySummary : localStorage.getItem("token")===null,
-      userId : localStorage.getItem("userId")? localStorage.getItem("userId") :null,
+      userId : localStorage.getItem("userId")? localStorage.getItem("userId") :null
+
     };
   },
   mounted() {
@@ -105,7 +106,8 @@ export default {
   methods: {
     getAllSurveys() {
 
-       axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/viewallsurvey')
+       axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/')
+
       .then(res => {
         if(this.userId==1){
           this.filteredSurveyList = res.data;
@@ -130,11 +132,19 @@ export default {
       let data = {
         id: surveyId
       }
-      axios.delete(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/delete/'+surveyId)
+
+      let config = {
+      headers:{
+        'userId' : localStorage.getItem("userId"),
+        'token' : localStorage.getItem("token")
+      }
+    }
+
+      axios.delete(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+surveyId,config)
       .then((res)=> {
         this.getAllSurveys()
       })
-    }
+    },
   },
 };
 </script>

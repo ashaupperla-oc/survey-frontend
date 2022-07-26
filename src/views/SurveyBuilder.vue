@@ -106,8 +106,8 @@ export default {
       questionTypes: [
         { value: 'DEFAULT', label: '- Select a question type -' },
         { value: 'BOOLEAN', label: 'Yes or No' },
-        { value: 'MULTI_CHOICE', label: 'Multiple Choice' },
-        { value: 'SINGLE_CHOICE', label: 'Single Choice' },
+        { value: 'MULTI_CHOICE', label: 'Checkbox' },
+        { value: 'SINGLE_CHOICE', label: 'Multiple Choice' },
         { value: 'TEXT', label: 'Text' },
         { value: 'SCALE', label: 'Rating' },
       ],

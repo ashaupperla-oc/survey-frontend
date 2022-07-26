@@ -24,8 +24,7 @@ export default {
     let viewSurveyReq = {
       surveyId: this.$route.params.surveyId
     }
-
-     axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/view',viewSurveyReq)
+     axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+this.$route.params.surveyId)
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {

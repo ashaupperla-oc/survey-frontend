@@ -58,7 +58,14 @@ export default {
         return;
       }
 
-      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/create',data)
+      let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }
+
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/create',data,config)
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;

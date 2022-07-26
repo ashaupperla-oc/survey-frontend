@@ -40,7 +40,8 @@ export default {
       surveyId: this.$route.params.surveyId
     }
     console.log(" viewSurveyReq ", viewSurveyReq)
-     axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/view',viewSurveyReq)
+     axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+this.$route.params.surveyId)
+
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
@@ -59,7 +60,16 @@ export default {
         surveyid: this.surveyid
       }
 
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data)
+  let config = {
+      headers:{
+        'userId' : localStorage.getItem("userId"),
+        'token' : localStorage.getItem("token")
+
+      }
+    }
+
+      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data,config)
+
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;

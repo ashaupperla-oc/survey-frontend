@@ -67,7 +67,7 @@ export default {
 
     const adminId = this.$route.params.id;
     this.id = this.$route.params.id;
-      axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/get/'+adminId)
+      axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/'+adminId)
     .then(res => {
       this.name = res.data.name;
       this.email = res.data.email;
@@ -81,7 +81,15 @@ export default {
         name: this.name,
       }
 
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails)
+      let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }
+
+      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails,config)
+
       .then(res => {
         if(res.status == 401){
           this.errorMsg = res.data.error;
