@@ -89,6 +89,7 @@ export default {
       }
 
       axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails,config)
+
       .then(res => {
         if(res.status == 401){
           this.errorMsg = res.data.error;

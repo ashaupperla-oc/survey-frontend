@@ -41,6 +41,7 @@ export default {
     }
     console.log(" viewSurveyReq ", viewSurveyReq)
      axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+this.$route.params.surveyId)
+
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
@@ -63,10 +64,12 @@ export default {
       headers:{
         'userId' : localStorage.getItem("userId"),
         'token' : localStorage.getItem("token")
+
       }
     }
 
       axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data,config)
+
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;
