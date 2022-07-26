@@ -42,7 +42,6 @@
               <div class="option-section" v-if="question.type === 'SINGLE_CHOICE'">
                 <div v-for='(option, optionIndex) in question.options' :key="optionIndex">
                   <label>
-                    {{index}} 
                     <input type="radio" :name="'single'+ index" :disabled="readOnly" :value="option.body">&nbsp;{{option.body}}
                   </label>
                   <div class="" v-if="option.imageUrl">

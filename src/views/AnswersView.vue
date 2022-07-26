@@ -82,6 +82,21 @@
       <div v-else class="p-0 text-right" style="display:flex; margin:1vh">
         <button type="button" class="btn btn-lg btn-success" v-on:click="submitanswer()">Update Survey</button>
       </div>
+
+      <!-- <div class="container">
+        <form id="sendemail" style="margin:1vh; float:right;">
+          <input type="text" v-model="to_name" name="to_name" placeholder="Invitee Name" style="margin:1vh;">
+          <br/>
+          <input type="email" v-model="to_email" name="to_email" placeholder="Invitee Email" style="margin:1vh;">
+          <br/>
+          <textarea name="to_message" v-model="to_message" cols="30" rows="5" placeholder="Invitee Message" style="margin:1vh;">
+          </textarea>
+          <br/>
+          <button type="submit" class="btn btn-sm btn-success" v-on:click="sendEmail()">Send Invite Via Mail</button>
+
+        </form>
+    </div> -->
+
   </div>
 </template>
 
@@ -91,6 +106,8 @@ import SurveyBuilder from './SurveyBuilder.vue';
 import StarRating from 'vue-star-rating';
 
 import axios from 'axios';
+import emailjs from 'emailjs-com';
+
 export default {
   name: 'AnswersView',
 
@@ -102,7 +119,10 @@ export default {
       selectedQuestion: { id: null },
       name:'',
       answers:[],
-      answerCheck:[]
+      answerCheck:[],
+      to_name: '',
+      to_email: '',
+      to_message: ''
     };
   },
   props: ['questions', 'readOnly','enduser'],
@@ -154,7 +174,7 @@ export default {
         }
       });
 
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+"api/answer/create",value)
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+"api/answer/create",value)
     .then(res => {
     });
       this.$router.push({name: 'GetMySurvey', params: {id: 'filledsurvey'}}); 
@@ -177,6 +197,23 @@ export default {
           value: answerCheckBox
         });
       }
+    },
+    sendEmail(e) {
+      try {
+        emailjs.sendForm('service_7dw7xwg', 'template_vzjxlde','#sendemail','NzZrC-wsiBaw-lJs7')
+        .then(function(response) {
+          console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+          console.log('FAILED...', error);
+        });
+
+      } catch(error) {
+          console.log({error})
+      }
+      // Reset form field
+      this.to_name = ''
+      this.to_email = ''
+      this.to_message = ''
     }
   },
 };

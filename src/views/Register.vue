@@ -59,9 +59,25 @@ export default {
         email: this.email,
         password: this.password,
       }
-      axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/register',registerUser);
-      this.$forceUpdate();
-      this.$router.push({name: 'GetMySurvey',params: {id: 'adminregistered'}}); 
+      let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }
+      console.log( localStorage.getItem("token") +" somesdsf " + localStorage.getItem("userId"));
+
+      axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/register',registerUser,config)
+      .then((res)=> {
+        if(res.status ==200){
+         this.$forceUpdate();
+         this.$router.push({name: 'GetMySurvey',params: {id: 'adminregistered'}}); 
+        }else{
+          this.$forceUpdate();
+         this.$router.push({name: 'GetMySurvey',params: {id: 'adminregistereFailed'}}); 
+        }
+      });
+      
     }
   },
   mounted(){

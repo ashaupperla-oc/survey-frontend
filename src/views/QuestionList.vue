@@ -1,6 +1,6 @@
 <template>
   <div class="test-survey-builder container-fluid">
-  <Header staticContent='Welcome to Survey : ' :title="this.$route.params.url" />
+  <Header staticContent='Its Responding Time' title="" />
   <AnswersView :questions="questionsList" :readOnly="false" :enduser="true"/>
   </div>
 </template>
@@ -20,12 +20,11 @@ export default {
     };
   },
   mounted() {
-
+      console.log('this.$route.params',this.$route.params)
     let viewSurveyReq = {
-      url: this.$route.params.url
+      surveyId: this.$route.params.surveyId
     }
-
-     axios.post(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/view',viewSurveyReq)
+     axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+this.$route.params.surveyId)
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {

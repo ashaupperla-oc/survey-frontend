@@ -46,7 +46,13 @@
       this.$router.push({name: 'GetMySurvey', params: {id: 'unauthorized'}}); 
     }
 
-     axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/list')
+      let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }
+     axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/',config)
     .then(res => {
       this.adminList= [];
       res.data.forEach(admin => {
@@ -59,9 +65,23 @@
         this.$router.push({name: 'AdminDetail', params: {id: admin.id}}); 
       },
       deleteAdmin(admin, index){
-        axios.delete(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/delete/'+admin.id)
-        .then((res)=> {                    
-          axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/list')
+         let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }
+      
+      axios.delete(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/'+admin.id,config)
+      .then((res)=> {     
+           let config = {
+        headers:{
+          'userId' : localStorage.getItem("userId"),
+          'token' : localStorage.getItem("token")
+        }
+      }               
+      axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/',config)
+
     .then(res => {
       this.adminList= [];
       res.data.forEach(admin => {

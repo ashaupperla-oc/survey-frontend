@@ -9,6 +9,7 @@ import SummaryView from "../views/admin/SummaryView.vue";
 import AdminList from "../views/admin/AdminList.vue";
 import AdminDetail from "../views/admin/AdminDetail.vue";
 import EditSurvey from "../views/EditSurvey.vue";
+import ProfileDetail from "../views/ProfileDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,17 +56,22 @@ const router = createRouter({
       component: AdminDetail,
     },
     {
-      path: "/survey/:url",
+      path: "/profiledetail/:id",
+      name: "ProfileDetail",
+      component: ProfileDetail,
+    },
+    {
+      path: "/survey/:surveyId",
       name: "QuestionList",
       component: QuestionList,
     },
     {
-      path: "/admin/summary/:url",
+      path: "/admin/summary/:surveyId",
       name: "SummaryView",
       component: SummaryView,
     },
     {
-      path: "/admin/survey/edit/:url",
+      path: "/admin/survey/edit/:surveyId",
       name: "EditSurvey",
       component: EditSurvey,
     },
