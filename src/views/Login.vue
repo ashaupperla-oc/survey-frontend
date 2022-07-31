@@ -3,6 +3,7 @@
     <Header staticContent='' title="" />
   <b-alert show variant="success" v-if="$route.params.id === 'registered'">User Registered Successfully</b-alert>
 
+
   <div class="container-fluid  vh-100">
     <div class="row d-flex justify-content-center align-items-center vh-100">
       <div class="col-md-9 col-lg-6 col-xl-5">
