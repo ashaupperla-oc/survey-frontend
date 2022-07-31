@@ -127,7 +127,6 @@ export default {
       }
 
       axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/'+adminId,config)
-
     .then(res => {
       this.name = res.data.name;
       this.email = res.data.email;
@@ -149,7 +148,6 @@ export default {
       }
 
       axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/update',updatedAdminDetails,config)
-
       .then(res => {
         if(res.status == 401){
           this.errorMsg = res.data.error;
@@ -158,7 +156,6 @@ export default {
         }
         else if(res.status == 200){
           this.$router.push({name: 'GetMySurvey'}); 
-
         }
       });
     },
@@ -182,7 +179,6 @@ let config = {
       }
 
       axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/admin/updatepassword',updatedPasswordDetail,config)
-
       .then(res => {
         if(res.status == 401){
           this.errorMsg = res.data.error;
