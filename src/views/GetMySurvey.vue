@@ -92,7 +92,6 @@ export default {
       filteredSurveyList: [],
       displaySummary : localStorage.getItem("token")===null,
       userId : localStorage.getItem("userId")? localStorage.getItem("userId") :null
-
     };
   },
   mounted() {
@@ -107,7 +106,6 @@ export default {
     getAllSurveys() {
 
        axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/')
-
       .then(res => {
         if(this.userId==1){
           this.filteredSurveyList = res.data;

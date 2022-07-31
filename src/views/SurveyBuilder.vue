@@ -97,7 +97,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: 'SurveyBuilder',
@@ -139,7 +138,6 @@ export default {
           window.console.log('Question type not matched');
       }
     },
-    
     /**
      * @param {String} format
      * @return {null}

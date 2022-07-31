@@ -17,8 +17,8 @@ export default {
   
   props: ['nameOfId'],
   computed(){
+
   },
-  
   mounted(){
     
     var ctx = document.getElementById(this.nameOfId).getContext("2d");
