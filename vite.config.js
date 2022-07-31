@@ -6,7 +6,6 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'development' ? '' : '/survey-frontend/',
   plugins: [vue(), vueJsx()],
   resolve: {
     alias: {
