@@ -83,19 +83,19 @@
         <button type="button" class="btn btn-lg btn-success" v-on:click="submitanswer()">Update Survey</button>
       </div>
 
-      <!-- <div class="container">
+      <div class="container">
         <form id="sendemail" style="margin:1vh; float:right;">
-          <input type="text" v-model="to_name" name="to_name" placeholder="Invitee Name" style="margin:1vh;">
+          <input type="text" v-model="to_name" name="to_name" placeholder="Invitee Name" required style="margin:1vh;">
           <br/>
-          <input type="email" v-model="to_email" name="to_email" placeholder="Invitee Email" style="margin:1vh;">
+          <input type="email" v-model="to_email" name="to_email" placeholder="Invitee Email" required style="margin:1vh;">
           <br/>
-          <textarea name="to_message" v-model="to_message" cols="30" rows="5" placeholder="Invitee Message" style="margin:1vh;">
+          <textarea required name="to_message" v-model="to_message" cols="30" rows="5" placeholder="Invitee Message" style="margin:1vh;">
           </textarea>
           <br/>
           <button type="submit" class="btn btn-sm btn-success" v-on:click="sendEmail()">Send Invite Via Mail</button>
 
         </form>
-    </div> -->
+    </div>
 
   </div>
 </template>
@@ -200,7 +200,7 @@ export default {
     },
     sendEmail(e) {
       try {
-        emailjs.sendForm('service_7dw7xwg', 'template_vzjxlde','#sendemail','NzZrC-wsiBaw-lJs7')
+        emailjs.sendForm('service_gs7n2yh', 'template_gch4wub','#sendemail','JBffaJ2LoPDTIULjK')
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
         }, function(error) {
