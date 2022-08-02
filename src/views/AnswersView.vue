@@ -200,7 +200,7 @@ export default {
     },
     sendEmail(e) {
       try {
-        emailjs.sendForm('service_gs7n2yh', 'template_gch4wub','#sendemail','JBffaJ2LoPDTIULjK')
+        emailjs.sendForm('service_7dw7xwg', 'template_vzjxlde','#sendemail','NzZrC-wsiBaw-lJs7')
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
         }, function(error) {

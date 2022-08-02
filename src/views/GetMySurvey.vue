@@ -22,7 +22,7 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <a :href="'/survey/'+survey.id">
+              <a :href="publicPath+'/survey/'+survey.id">
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
@@ -46,7 +46,7 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <a :href="'/survey/'+survey.id">
+              <a :href="publicPath+'/survey/'+survey.id">
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
