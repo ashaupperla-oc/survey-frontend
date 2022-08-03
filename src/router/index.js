@@ -14,7 +14,7 @@ import ProfileDetail from "../views/ProfileDetail.vue";
 
 const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
-  history: createWebHistory("/survey-frontend"),
+  history: createWebHistory(),
   
   routes: [
     {
