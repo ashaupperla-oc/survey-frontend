@@ -22,7 +22,7 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <a :href="'/survey-frontend/survey/'+survey.id">
+              <a @click="this.$router.push({name: 'QuestionList', params: {surveyId: survey.id}})">
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
@@ -46,7 +46,9 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <a :href="'/survey-frontend/survey/'+survey.id">
+              <!-- <a :href="'/survey-frontend/survey/'+survey.id"> -->
+              <a @click="this.$router.push({name: 'QuestionList', params: {surveyId: survey.id}})">
+              
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
@@ -95,6 +97,7 @@ export default {
     };
   },
   mounted() {
+    
     this.surveyList= [];
     this.getAllSurveys();
     this.emitter.on('selected-question', obj => {
