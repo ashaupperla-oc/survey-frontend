@@ -14,7 +14,7 @@
       Question :  {{question[1]}}
       <hr/>
       <div v-for="(textQuestionValue,index) in textQuestionValues"  :key="textQuestionValue" >
-      <p v-if="textQuestionValue[0].includes(question[1]) "> {{index+1}}. {{JSON.parse(textQuestionValue[1])}}</p>
+      <p v-if="textQuestionValue[0].includes(question[1]) "> {{index+1}}. {{textQuestionValue[1]}}</p>
       </div>
     </div>
        
