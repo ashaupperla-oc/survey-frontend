@@ -44,7 +44,7 @@ export default {
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
-        let question = JSON.parse((element.content));
+        let question = element.content;
         question.qid = element.id;
           this.questionsList.push(question);
       });
