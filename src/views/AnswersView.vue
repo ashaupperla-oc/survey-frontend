@@ -138,7 +138,7 @@ export default {
       this.answers[index] = rating;
     },
     editQuestion(question, index) {
-      this.selectedQuestion = JSON.parse(JSON.stringify(question));
+      this.selectedQuestion = question;
       this.selectedQuestion.questionNumber = index + 1;
     },
     deleteQuestion(question, index) {
