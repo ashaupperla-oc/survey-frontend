@@ -13,30 +13,32 @@ import EditSurvey from "../views/EditSurvey.vue";
 import ProfileDetail from "../views/ProfileDetail.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory("/survey-frontend"),
+  
   routes: [
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/",
+      path: "/",
       name: "homelogin",
       component: GetMySurvey,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/login",
+      path: "/login",
       name: "login",
       component: Login,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/register",
+      path: "/register",
       name: "register",
       component: Register,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/create-survey",
+      path: "/create-survey",
       name: "createSurvey",
       component: CreateSurvey,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/surveys",
+      path: "/surveys",
       name: "GetSurvey",
       component: GetSurvey,
       meta: {
@@ -44,7 +46,7 @@ const router = createRouter({
       },
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/survey",
+      path: "/survey",
       name: "GetMySurvey",
       component: GetMySurvey,
       meta: {
@@ -53,7 +55,7 @@ const router = createRouter({
     },
 
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/adminlist",
+      path: "/adminlist",
       name: "AdminList",
       component: AdminList,
       meta: {
@@ -61,35 +63,35 @@ const router = createRouter({
       },
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/admindetail/:id",
+      path: "/admindetail/:id",
       name: "AdminDetail",
       component: AdminDetail,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/profiledetail/:id",
+      path: "/profiledetail/:id",
       name: "ProfileDetail",
       component: ProfileDetail,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/survey/:surveyId",
+      path: "/survey/:surveyId",
       name: "QuestionList",
       component: QuestionList,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/admin/summary/:surveyId",
+      path: "/admin/summary/:surveyId",
       name: "SummaryView",
       component: SummaryView,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/admin/survey/edit/:surveyId",
+      path: "/admin/survey/edit/:surveyId",
       name: "EditSurvey",
       component: EditSurvey,
     },
     {
-      path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/:catchAll(.*)",
+      path: "/:catchAll(.*)",
       name: "pnf",
       redirect: (to) => {
-        return { path: "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/survey-frontend/survey" };
+        return { path: "/survey" };
       },
     },
   ],
