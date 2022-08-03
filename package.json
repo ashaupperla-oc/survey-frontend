@@ -10,6 +10,7 @@
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4173/ 'cypress run --e2e'",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
+  "homepage": "http://ec2-18-117-253-229.us-east-2.compute.amazonaws.com/",
   "dependencies": {
     "bootstrap-vue-3": "^0.1.13",
     "chart.js": "^3.8.0",
