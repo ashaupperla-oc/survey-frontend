@@ -138,7 +138,7 @@ export default {
       this.answers[index] = rating;
     },
     editQuestion(question, index) {
-      this.selectedQuestion = question;
+      this.selectedQuestion = JSON.parse(JSON.stringify(question));
       this.selectedQuestion.questionNumber = index + 1;
     },
     deleteQuestion(question, index) {
@@ -200,7 +200,7 @@ export default {
     },
     sendEmail(e) {
       try {
-        emailjs.sendForm('service_7dw7xwg', 'template_vzjxlde','#sendemail','NzZrC-wsiBaw-lJs7')
+        emailjs.sendForm('service_gs7n2yh', 'template_gch4wub','#sendemail','JBffaJ2LoPDTIULjK')
         .then(function(response) {
           console.log('SUCCESS!', response.status, response.text);
         }, function(error) {

@@ -44,6 +44,7 @@ export default {
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
+        // let question = JSON.parse(JSON.parse(JSON.stringify(element.content)));
         let question = element.content;
         question.qid = element.id;
           this.questionsList.push(question);
@@ -86,6 +87,7 @@ export default {
       if (questionIndex >= 0) {
         this.questionsList.splice(questionIndex, 1, question);
       } else {
+        // this.questionsList.push(JSON.parse(JSON.stringify(question)));
         this.questionsList.push(question);
       }
       this.addQuestion = false;
@@ -93,6 +95,7 @@ export default {
       window.console.log(question, this.addQuestion, this.questionsList);
     },
     addNewQuestion() {
+      // this.sampleQuestion = JSON.parse(JSON.stringify(sampleQuestionObj));
       this.sampleQuestion = sampleQuestionObj;
       this.addQuestion = true;
       this.emitter.on('add-update-question', q => {
