@@ -13,8 +13,8 @@ import EditSurvey from "../views/EditSurvey.vue";
 import ProfileDetail from "../views/ProfileDetail.vue";
 
 const router = createRouter({
-  // history: createWebHistory(import.meta.env.BASE_URL),
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(),
   
   routes: [
     {
