@@ -71,7 +71,7 @@ const router = createRouter({
       component: ProfileDetail,
     },
     {
-      path: "/survey/:surveyId",
+      path: "/survey-frontend/survey/:surveyId",
       name: "QuestionList",
       component: QuestionList,
     },
