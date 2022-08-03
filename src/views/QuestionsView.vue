@@ -99,7 +99,7 @@ export default {
   },
   methods: {
     editQuestion(question, index) {
-      this.selectedQuestion = question;
+      this.selectedQuestion = JSON.parse(JSON.stringify(question));
       this.selectedQuestion.questionNumber = index + 1;
     },
     deleteQuestion(question, index) {

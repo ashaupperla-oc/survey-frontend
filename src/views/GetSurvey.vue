@@ -12,6 +12,7 @@
   <b-alert show variant="success" v-if="$route.params.id === 'adminregistered'">Admin Registered Successfully</b-alert>  
   <b-alert show variant="danger" v-if="$route.params.id === 'IncorrectPasswordDetails'">Incorrect credential details</b-alert> 
   <b-alert show variant="success" v-if="$route.params.id === 'passwordupdatesuccess'">Credential updated successfully</b-alert> 
+  <b-alert show variant="danger" v-if="$route.params.id === 'noquestions'">No Questions in survey</b-alert> 
  
  <b-row no-gutters v-if="userId==null">
     <b-col md="4"  v-for="(survey,index) in surveyList" :key="survey.id" >
@@ -83,7 +84,7 @@ import Logout from './Logout.vue';
 import Header from './Header.vue';
 
 export default {
-  name: 'GetMySurvey',
+  name: 'GetSurvey',
   props :['reload'],
   data() {
     return {

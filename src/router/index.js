@@ -4,6 +4,7 @@ import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import CreateSurvey from "../views/CreateSurvey.vue";
 import GetMySurvey from "../views/GetMySurvey.vue";
+import GetSurvey from "../views/GetSurvey.vue";
 import QuestionList from "../views/QuestionList.vue";
 import SummaryView from "../views/admin/SummaryView.vue";
 import AdminList from "../views/admin/AdminList.vue";
@@ -35,6 +36,14 @@ const router = createRouter({
       component: CreateSurvey,
     },
     {
+      path: "/surveys",
+      name: "GetSurvey",
+      component: GetSurvey,
+      meta: {
+        reload: true,
+      },
+    },
+    {
       path: "/survey",
       name: "GetMySurvey",
       component: GetMySurvey,
@@ -42,6 +51,7 @@ const router = createRouter({
         reload: true,
       },
     },
+
     {
       path: "/adminlist",
       name: "AdminList",
