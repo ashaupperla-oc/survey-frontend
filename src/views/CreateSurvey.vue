@@ -84,11 +84,15 @@ export default {
         
         }
       });
-      this.questionsList = [] //since this question list of survey is already submitted, we are resetting it.
+      
       // this.$router.push({name:'GetMySurvey', params:{keyword:'create'})
       this.$forceUpdate();
- 
+      if(this.questListLength == 0){
+      this.$router.push({name: 'GetSurvey', params: {id: 'noquestions'}});
+      }else {
       this.$router.push({name: 'GetSurvey', params: {id: 'created'}});
+      }
+      this.questionsList = [] //since this question list of survey is already submitted, we are resetting it.
     },
     updateQuestionsList(question) {
       const questionIndex = this.questionsList.findIndex(x => x.id === question.id);

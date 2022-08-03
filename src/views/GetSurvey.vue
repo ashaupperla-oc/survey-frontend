@@ -89,6 +89,7 @@ export default {
   data() {
     return {
       surveyList: [],
+      surveyListLength: 0,
       questionsList: [],
       filteredSurveyList: [],
       displaySummary : localStorage.getItem("token")===null,
@@ -96,17 +97,18 @@ export default {
     };
   },
   mounted() {
-    this.surveyList= [];
-    this.getAllSurveys();
+    this.surveyListLength= 10;
+    
     this.emitter.on('selected-question', obj => {
       window.console.log(obj);
       this.selectedQuestion = { id: null };
     });
+    this.getAllSurveys();
   },
   components: { QuestionsView,Logout,Header },
   methods: {
     getAllSurveys() {
-
+this.surveyListLength= 0;
        axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/')
       .then(res => {
         if(this.userId==1){
@@ -120,6 +122,18 @@ export default {
         });
         }
         this.surveyList = res.data;
+         if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        
+        // location.reload();
+        this.$router.go()
+        // this.$router.push({name: 'GetSurvey', params: {id: 'created'}});
+    }
       });
     },
     summary(surveyId,surveyName){
