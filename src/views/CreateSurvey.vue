@@ -29,7 +29,8 @@ export default {
     return {
       questionsList: [],
       addQuestion: false,
-      surveyName: null
+      surveyName: null,
+      questListLength : 0
     };
   },
   mounted() {
@@ -48,6 +49,8 @@ export default {
   components: { SurveyBuilder, QuestionsView,Header },
   methods: {
     saveQuestionList(){
+      console.log(this.questionsList)
+    this.questListLength = this.questionsList.length;
       const data = {
         questionsList : this.questionsList,
         userId : localStorage.getItem("userId"),
@@ -72,15 +75,24 @@ export default {
           this.message = null;
         }
         else if(res.data.status == 200){
-          this.$router.push('/');
+          
           this.message = res.data.msg;
           this.errorMsg = null;
+          this.questionsList = [] //since this question list of survey is already submitted, we are resetting it.
+        // this.$router.push({name:'GetMySurvey', params:{keyword:'create'})
+        this.$forceUpdate();
+        
         }
       });
-      this.questionsList = [] //since this question list of survey is already submitted, we are resetting it.
+      
       // this.$router.push({name:'GetMySurvey', params:{keyword:'create'})
       this.$forceUpdate();
-      this.$router.push({name: 'GetMySurvey', params: {id: 'created'}});
+      if(this.questListLength == 0){
+      this.$router.push({name: 'GetSurvey', params: {id: 'noquestions'}});
+      }else {
+      this.$router.push({name: 'GetSurvey', params: {id: 'created'}});
+      }
+      this.questionsList = [] //since this question list of survey is already submitted, we are resetting it.
     },
     updateQuestionsList(question) {
       const questionIndex = this.questionsList.findIndex(x => x.id === question.id);

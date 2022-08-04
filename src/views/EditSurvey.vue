@@ -41,11 +41,11 @@ export default {
     }
     console.log(" viewSurveyReq ", viewSurveyReq)
      axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/'+this.$route.params.surveyId)
-
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
-        let question = JSON.parse(JSON.parse(JSON.stringify(element.content)));
+        // let question = JSON.parse(JSON.parse(JSON.stringify(element.content)));
+        let question = element.content;
         question.qid = element.id;
           this.questionsList.push(question);
       });
@@ -64,12 +64,10 @@ export default {
       headers:{
         'userId' : localStorage.getItem("userId"),
         'token' : localStorage.getItem("token")
-
       }
     }
 
       axios.put(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/update',data,config)
-
       .then(res => {
         if(res.data.status == 401){
           this.errorMsg = res.data.error;
@@ -90,6 +88,7 @@ export default {
         this.questionsList.splice(questionIndex, 1, question);
       } else {
         this.questionsList.push(JSON.parse(JSON.stringify(question)));
+        // this.questionsList.push(question);
       }
       this.addQuestion = false;
       this.emitter.emit('selected-question', null);
@@ -97,6 +96,7 @@ export default {
     },
     addNewQuestion() {
       this.sampleQuestion = JSON.parse(JSON.stringify(sampleQuestionObj));
+      // this.sampleQuestion = sampleQuestionObj;
       this.addQuestion = true;
       this.emitter.on('add-update-question', q => {
         this.updateQuestionsList(q);

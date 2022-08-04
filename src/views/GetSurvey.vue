@@ -12,6 +12,7 @@
   <b-alert show variant="success" v-if="$route.params.id === 'adminregistered'">Admin Registered Successfully</b-alert>  
   <b-alert show variant="danger" v-if="$route.params.id === 'IncorrectPasswordDetails'">Incorrect credential details</b-alert> 
   <b-alert show variant="success" v-if="$route.params.id === 'passwordupdatesuccess'">Credential updated successfully</b-alert> 
+  <b-alert show variant="danger" v-if="$route.params.id === 'noquestions'">No Questions in survey</b-alert> 
  
  <b-row no-gutters v-if="userId==null">
     <b-col md="4"  v-for="(survey,index) in surveyList" :key="survey.id" >
@@ -22,7 +23,7 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <a @click="this.$router.push({name: 'QuestionList', params: {surveyId: survey.id}})">
+              <a :href="'/survey-frontend/survey/'+survey.id">
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
@@ -46,9 +47,7 @@
               <b-card-img :src="'https://picsum.photos/400/400/?image='+(survey.id+parseInt(10))" alt="Image" class="rounded-0"></b-card-img>
             </b-col>
             <b-col md="6">
-              <!-- <a :href="'/survey-frontend/survey/'+survey.id"> -->
-              <a @click="this.$router.push({name: 'QuestionList', params: {surveyId: survey.id}})">
-              
+              <a :href="'/survey-frontend/survey/'+survey.id">
               <b-row>
               <b-card-body :title="survey.surveyName">
                 <b-card-text>
@@ -85,11 +84,12 @@ import Logout from './Logout.vue';
 import Header from './Header.vue';
 
 export default {
-  name: 'GetMySurvey',
+  name: 'GetSurvey',
   props :['reload'],
   data() {
     return {
       surveyList: [],
+      surveyListLength: 0,
       questionsList: [],
       filteredSurveyList: [],
       displaySummary : localStorage.getItem("token")===null,
@@ -97,18 +97,18 @@ export default {
     };
   },
   mounted() {
+    this.surveyListLength= 10;
     
-    this.surveyList= [];
-    this.getAllSurveys();
     this.emitter.on('selected-question', obj => {
       window.console.log(obj);
       this.selectedQuestion = { id: null };
     });
+    this.getAllSurveys();
   },
   components: { QuestionsView,Logout,Header },
   methods: {
     getAllSurveys() {
-
+this.surveyListLength= 0;
        axios.get(import.meta.env.VITE_SERVER_ENDPOINT+'api/survey/')
       .then(res => {
         if(this.userId==1){
@@ -122,6 +122,18 @@ export default {
         });
         }
         this.surveyList = res.data;
+         if (localStorage.getItem('reloaded')) {
+        // The page was just reloaded. Clear the value from local storage
+        // so that it will reload the next time this page is visited.
+        localStorage.removeItem('reloaded');
+    } else {
+        // Set a flag so that we know not to reload the page twice.
+        localStorage.setItem('reloaded', '1');
+        
+        // location.reload();
+        this.$router.go()
+        // this.$router.push({name: 'GetSurvey', params: {id: 'created'}});
+    }
       });
     },
     summary(surveyId,surveyName){

@@ -3,18 +3,18 @@
   <div class="container-fluid">
     <Header staticContent='Summary of Survey : ' :title="surveyName"/>
     <div v-for="question in questions"  :key="question">
-      <div v-if="JSON.parse(question.content).type === 'MULTI_CHOICE'">{{multiChoice}}</div>
-      <div v-if="JSON.parse(question.content).type === 'SINGLE_CHOICE'">{{singleChoice}}</div>
-      <div v-if="JSON.parse(question.content).type === 'BOOLEAN'">{{yesNoEvaluate}}</div>
-      <div v-if="JSON.parse(question.content).type === 'TEXT'">{{textEvaluate}}</div>
-      <div v-if="JSON.parse(question.content).type === 'SCALE'">{{starratingEvaluate}}</div>
+      <div v-if="question.content.type === 'MULTI_CHOICE'">{{multiChoice}}</div>
+      <div v-if="question.content.type === 'SINGLE_CHOICE'">{{singleChoice}}</div>
+      <div v-if="question.content.type === 'BOOLEAN'">{{yesNoEvaluate}}</div>
+      <div v-if="question.content.type === 'TEXT'">{{textEvaluate}}</div>
+      <div v-if="question.content.type === 'SCALE'">{{starratingEvaluate}}</div>
     </div>
 
     <div v-for="question in textQuestions"  :key="question" style="border:solid; padding:1vh; margin:1vh">
       Question :  {{question[1]}}
       <hr/>
       <div v-for="(textQuestionValue,index) in textQuestionValues"  :key="textQuestionValue" >
-      <p v-if="textQuestionValue[0].includes(question[1]) "> {{index+1}}. {{JSON.parse(textQuestionValue[1])}}</p>
+      <p v-if="textQuestionValue[0].includes(question[1]) "> {{index+1}}. {{textQuestionValue[1]}}</p>
       </div>
     </div>
        
@@ -85,7 +85,7 @@
           no: 0,
         };
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'BOOLEAN'){
+          if(ques.content.type === 'BOOLEAN'){
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
                 if(ans.content.toString() === "\"Yes\"") boolValue.yes++;
@@ -98,9 +98,9 @@
       },
       textEvaluate: function(){
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'TEXT'){
-            let questionValue = JSON.parse(ques.content).body+' : ';
-            this.textQuestions.set(ques.id,JSON.parse(ques.content).body);
+          if(ques.content.type === 'TEXT'){
+            let questionValue = ques.content.body+' : ';
+            this.textQuestions.set(ques.id,ques.content.body);
 
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
@@ -112,12 +112,12 @@
       },
       yesNoEvaluate: function(){
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'BOOLEAN'){
-            let questionValue = JSON.parse(ques.content).body+' : ';
+          if(ques.content.type === 'BOOLEAN'){
+            let questionValue = ques.content.body+' : ';
             this.yesnoCount.set(questionValue + 'yes',0);
             this.yesnoCount.set(questionValue + 'no',0);
 
-            this.yesnoQuestions.set(ques.id,JSON.parse(ques.content).body);
+            this.yesnoQuestions.set(ques.id,ques.content.body);
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
                 if(ans.content.toString() === "\"Yes\""){
@@ -136,15 +136,15 @@
       singleChoice: function(){
         
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'SINGLE_CHOICE'){
-            let questionValue = JSON.parse(ques.content).body+' : ';
-            JSON.parse(ques.content).options.forEach((option) => {
+          if(ques.content.type === 'SINGLE_CHOICE'){
+            let questionValue = ques.content.body+' : ';
+            ques.content.options.forEach((option) => {
               this.selectedChoices.set(questionValue + option.body,0) ;
             })
-            this.selectedChoiceQuestions.set(ques.id,JSON.parse(ques.content).body);
+            this.selectedChoiceQuestions.set(ques.id,ques.content.body);
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
-                let selectedOption = JSON.parse(ans.content);
+                let selectedOption = ans.content;
                 if(this.selectedChoices.has(questionValue + selectedOption)){
                   let count = this.selectedChoices.get(questionValue + selectedOption);
                   this.selectedChoices.set(questionValue + selectedOption,count+1) ;
@@ -160,22 +160,22 @@
 
         let multipleChoiceQuestIds = [];
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'MULTI_CHOICE'){
+          if(ques.content.type === 'MULTI_CHOICE'){
             multipleChoiceQuestIds.push(ques.id);
           }
         });
 
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'MULTI_CHOICE'){
-            let questValue = JSON.parse(ques.content).body+' : ';
-            this.multipleChoiceQuestions.set(ques.id,JSON.parse(ques.content).body);
-            JSON.parse(ques.content).options.forEach((option) => {
+          if(ques.content.type === 'MULTI_CHOICE'){
+            let questValue = ques.content.body+' : ';
+            this.multipleChoiceQuestions.set(ques.id,ques.content.body);
+            ques.content.options.forEach((option) => {
               this.multiSelectedChoices.set(questValue + option.body,0) ;
             })
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
-                let answerOptions = JSON.parse(ans.content);
-                let questOptions = JSON.parse(ques.content).options;
+                let answerOptions = ans.content;
+                let questOptions = ques.content.options;
                 answerOptions.forEach(answerOption => {
                   let index = answerOption.index;
                   let optionIndex = answerOption.value;
@@ -195,10 +195,10 @@
       starratingEvaluate: function(){
 
         this.questions.forEach((ques) => {
-          if(JSON.parse(ques.content).type === 'SCALE'){
-            let questValue = JSON.parse(ques.content).body+' : ';
-            let intervals = JSON.parse(ques.content).intervals;
-            this.ratingChoiceQuestions.set(ques.id,JSON.parse(ques.content).body);
+          if(ques.content.type === 'SCALE'){
+            let questValue = ques.content.body+' : ';
+            let intervals = ques.content.intervals;
+            this.ratingChoiceQuestions.set(ques.id,ques.content.body);
             let loop_temp_var=1;
             while(loop_temp_var<=intervals){
               this.ratingSelectedChoices.set(questValue + 'star'+loop_temp_var,0);
@@ -206,7 +206,7 @@
             }
             this.ansData.forEach((ans) => {
               if(ques.id === ans.questionId) {
-                let rating = JSON.parse(ans.content);
+                let rating = ans.content;
                 let existingRating = this.ratingSelectedChoices.get(questValue + 'star'+rating);
                 this.ratingSelectedChoices.set(questValue + 'star'+rating,existingRating+1);
               }

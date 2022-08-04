@@ -28,7 +28,8 @@ export default {
     .then(res => {
       this.questionsList= [];
       res.data.forEach(element => {
-        let question = JSON.parse(JSON.parse(JSON.stringify(element.content)));
+        // let question = JSON.parse(JSON.parse(JSON.stringify(element.content)));
+        let question = element.content;
         question.qid = element.id;
           this.questionsList.push(question);
       });
